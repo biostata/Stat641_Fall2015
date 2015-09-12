@@ -23,7 +23,7 @@ Data <- read.csv(paste0(RScriptPath, 'data1.csv'))
 t.test(w ~ z, data = Data, var.equal = T)
 
 # b)
-round(aggregate(x~z, function(x) c(mean=mean(x),sd=sd(x)),data=Data),3)
+round(aggregate(x~z, function(y) c(mean=mean(y),sd=sd(y)),data=Data),3)
 round(aggregate(w~z, function(x) c(mean=mean(x),sd=sd(x)),data=Data),3)
 
 # c)
@@ -31,18 +31,18 @@ t.test(x ~ z, data = Data, var.equal = T)
 
 # d)
 pdf("Plot_d.pdf", width=6, height=4, paper='special') 
-qplot() + geom_point(aes(x = w, y = x, col = factor(z), shape = factor(z)), data = Data) +
+qplot() + geom_point(aes(x = w, y = x, col = factor(z), shape = factor(z)), data = Data, size=3) +
   xlab(label='w') + ylab(label='x')
 dev.off()
 
 # e)
 model1 <- lm(x ~ as.factor(z) + w, data = Data)
 summary(model1)
+xtable(summary(model1))
 
 model0 <- lm(x ~  as.factor(z), data = Data)
 summary(model0)
-
-xtable(summary(model1))
+xtable(summary(model0))
 
 ## pdf("e.pdf",width=6,height=4,paper='special') 
 ## plot(x~w, pch=(z=="0")+16,col=(z=="0")+160)
