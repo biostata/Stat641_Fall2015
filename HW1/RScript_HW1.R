@@ -30,47 +30,43 @@ round(aggregate(w~z, function(x) c(mean=mean(x),sd=sd(x)),data=Data),3)
 t.test(x ~ z, data = Data, var.equal = T)
 
 # d)
-ggplot() + geom_point(aes(x = w, y = x), data = Data)
+pdf("Plot_d.pdf", width=6, height=4, paper='special') 
+qplot() + geom_point(aes(x = w, y = x, col = factor(z), shape = factor(z)), data = Data) +
+  xlab(label='w') + ylab(label='x')
+dev.off()
 
-#pdf("d.pdf",width=6,height=4,paper='special') 
-plot(x~w, data = Data, pch=(z=="0")+16,col=(z=="0")+160)
-legend("bottomright",pch=c(16,17),col=c(160,161),c("z=1","z=0"), bty="n")
-#dev.off()
 # e)
-summary(lm(x ~ as.factor(z) , data=data))
-model1<-lm(x ~ as.factor(z) + w, data=data)
+model1 <- lm(x ~ as.factor(z) + w, data = Data)
 summary(model1)
 
-model10<-lm(x ~  w+as.factor(z), data=data)
-summary(model10)
-
-model100<-lm(x-w ~  as.factor(z), data=data)
-summary(model100)
+model0 <- lm(x ~  as.factor(z), data = Data)
+summary(model0)
 
 xtable(summary(model1))
 
-pdf("e.pdf",width=6,height=4,paper='special') 
-plot(x~w, pch=(z=="0")+16,col=(z=="0")+160)
-mA <- lm(x~w,data=data, subset=z=="0")
-mB <- lm(x~w,data=data, subset=z=="1")
-abline(mA, col=161,lwd=2)
-abline(mB, col=160,lwd=2)
-legend("bottomright",pch=c(16,17),col=c(160,161),c("z=1","z=0"), bty="n")
-dev.off()
+## pdf("e.pdf",width=6,height=4,paper='special') 
+## plot(x~w, pch=(z=="0")+16,col=(z=="0")+160)
+## mA <- lm(x~w,data=data, subset=z=="0")
+## mB <- lm(x~w,data=data, subset=z=="1")
+## abline(mA, col=161,lwd=2)
+## abline(mB, col=160,lwd=2)
+## legend("bottomright",pch=c(16,17),col=c(160,161),c("z=1","z=0"), bty="n")
+## dev.off()
 
 # g)
-
-t.test(y ~ z, data = data,var.equal = T)
+t.test(y ~ z, data = Data, var.equal = T)
 
 # h)
+model2 <- lm(y ~ as.factor(z) + w , data = Data)
+summary(model2)
 
-model12<-lm(y ~ as.factor(z) + w , data=data)
-summary(model12)
 xtable(summary(model12))
 # i)
 
-model2<-lm(y ~ as.factor(z) + w + x, data=data)
-summary(model2)
-model20<-lm(y ~ as.factor(z) + w , data=data)
-summary(model20)
-xtable(summary(model2))
+model3 <- lm(y ~ as.factor(z) + w + x, data = Data)
+summary(model3)
+
+model30 <- lm(y ~ as.factor(z) + w , data = Data)
+summary(model30)
+
+xtable(summary(model3))

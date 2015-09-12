@@ -1,0 +1,237 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=1in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 1}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{September 17, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{Problem 1} Assuming that all variables other than \emph{z} are normally distributed.\\
+A significance level of $\alpha=0.05$ was assumed to test all the hypotheses:
+
+\begin{enumerate}
+\item[(a)] The hypothesis for the two-sample t-test for differences in variable \emph{w} between treatment 
+groups will be
+\begin{eqnarray*}
+  H_0 &:& \mu_{w_0} =\mu_{w_1}\\
+  H_1 &:& \mu_{w_0} \neq \mu_{w_1},
+\end{eqnarray*}
+where $\mu_{w_0}$ and $\mu_{w_1}$ represent the mean of the variable \emph{w} for each treatment group (\emph{z} = 0, 1, respectively).\\
+Assuming equal variances:
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+\hline
+t-statistic & df & p-value\\
+\hline
+0.0189 & 98 & 0.985\\
+\hline
+\end{tabular}
+\caption{Two sample t-test for \emph{w}}
+\end{table}
+There is no statistical evidence to reject the null hypothesis and we conclude that there is no significant difference 
+in the means of the baseline variable \emph{w} for the two treatment groups.  
+
+\item[(b)] For response variable \emph{x}:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{ccc}
+\hline
+Treatment Group & Mean & Std. Dev.\\
+\hline
+ 0 &13.944&  1.091\\
+ 1 &14.336 & 0.986\\
+\hline
+\end{tabular}
+\caption{Mean and Std. Dev. for each treatment group}
+\end{table}
+
+Both standard deviations are close to one and the means of the response variable \emph{x} are similar but we would have to test it 
+to make any statistical conclusion.
+
+\item[(c)] The hypothesis for the two-sample t-test for differences in variable \emph{x} between treatment 
+groups will be
+\begin{eqnarray*}
+  H_0 &:& \mu_{x_0} =\mu_{x_1}\\
+  H_1 &:& \mu_{x_0} \neq \mu_{x_1},
+\end{eqnarray*}
+where $\mu_{x_0}$ and $\mu_{x_1}$ represent the mean of the variable \emph{x} for each treatment group (\emph{z}=0,1, respectively).\\
+Assuming equal variances:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+\hline
+t-statistic & df & p-value\\
+\hline
+ -1.885 & 98 & 0.0624\\
+\hline
+\end{tabular}
+\caption{Two sample t-test for \emph{x}}
+\end{table}
+
+There is no significant evidence to reject the null hypothesis and we conclude that the means between the two groups are equal. 
+
+\newpage
+\item[(d)] The plot is:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.65]{Plot_d.pdf}
+\vspace{-0.6cm}
+\caption{\emph{x} vs \emph{w}}
+\end{figure}
+
+Figure 1 shows a linear pattern for both groups. No clear differences between them but the slope for $z=0$ seems 
+that will be slightly steeper then the one for $z=1$.
+
+\item[(e)] The result of the fitted model is:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcccc}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & 11.7317 & 0.2223 & 52.78 & $\sim 0$ \\ 
+ \textbf{z1} & 0.3949 & 0.1388 & 2.85 & \textbf{0.0054} \\ 
+  w & 0.7345 & 0.0662 & 11.09 & $\sim 0$ \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{x$\sim$z+w} }
+\end{table}
+
+Adjusting by the baseline value \emph{w}, there is significant evidence to reject the null hypothesis ($H_0:\mu_{x_0} =\mu_{x_1}$)
+ and we conclude that the means for the response variable \emph{x} between both treatments are not equal (given \emph{w}). 
+
+
+%\begin{figure}[h!]
+%\centering
+%\includegraphics[scale=0.65]{e.pdf}
+%\vspace{-0.6cm}
+%\caption{Awesome Image}
+%\end{figure}
+
+\item[(f)] The answers differ since in part (c) we are not controlling by the baseline variable. Once we do, the 
+ conclusion changes from no significant difference in the means to a significant one.\\
+Given that \emph{w} is in the model, there is an association between \emph{x} and \emph{z} since the 
+mean between the different groups are not statistically equal. This leads us to believe that \emph{w} is not a confounder variable. If it were, then given that \emph{w} is in the model there would be
+ no association between \emph{x} and \emph{z}. 
+
+
+\newpage
+\item[(g)]
+
+The hypothesis for the two-sample t-test for differences in variable \emph{w} between treatment 
+groups will be
+\begin{eqnarray*}
+  H_0 &:& \mu_{y_0} =\mu_{y_1}\\
+  H_1 &:& \mu_{y_0} \neq \mu_{y_1},
+\end{eqnarray*}
+where $\mu_{y_0}$ and $\mu_{y_1}$ represent the mean of the variable \emph{y} for each treatment group (\emph{z}=0,1, respectively).\\
+Assuming equal variances:
+
+    \begin{table}[h!]
+\centering
+\begin{tabular}{lll}
+\hline
+t-statistic & df & p-value\\
+\hline
+-1.6885 & 98 & 0.09449\\
+\hline
+\end{tabular}
+\caption{Two sample t-test for \emph{y}}
+\end{table}
+
+Based on the p-value we conclude that there is no sifnicant evidence to reject the null hypothesis so the 
+means for the response variable \emph{y} between both treatments are equal. 
+
+\item[(h)] To perform a two sample t-test for the response variable \emph{y} between treatment groups, adjusting for the baseline variabe 
+\emph{w} is necessary to fit the following linear model:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcccc}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & 33.6902 & 2.5730 & 13.09 & $\sim 0$ \\ 
+  \textbf{z1} & 3.3416 & 1.6066 & 2.08 & \textbf{0.0402} \\ 
+  w & 5.4083 & 0.7665 & 7.06 & $\sim 0$ \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{y$\sim$z+w} }
+\end{table}
+
+We can see that the conclusion changes adjusting for the baseline. In this case, there is significant evidence to 
+reject the null hypothesis ($p-value=0.0402<\alpha=0.05$) and we conclude that the 
+means for the response variable \emph{y} between both treatments are not equal, adjusted by \emph{w}.
+
+
+\item[(i)] The result of the fitted model is:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{lcccc}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & -63.6200 & 9.8354 & -6.47 & $\sim 0$ \\ 
+ \textbf{z1} & 0.0658 & 1.1726 & 0.06 & \textbf{0.9554} \\ 
+  w & -0.6841 & 0.8095 & -0.85 & 0.4002 \\ 
+  x & 8.2946 & 0.8241 & 10.06 & $\sim 0$ \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{y$\sim$z+w+x} }
+\end{table}
+
+Adjusting by both \emph{w} and \emph{x}, there is no significant evidence to reject the null hypothesis ($H_0:\mu_{y_0} =\mu_{y_1}$)
+ and we conclude that the means for the response variable \emph{y} between both treatments are equal (given \emph{w} and \emph{x}). 
+
+\newpage
+\item[(j)] The results from the three previous questions can be summarized as:
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{clcc}
+\hline
+ & Model & p-value for \emph{z} & Diff. bewtween \emph{y} and \emph{z}\\
+\hline
+(g) & \texttt{y$\sim$z} & 0.0945 & NO\\
+(h) & \texttt{y$\sim$z+w} & 0.0402 & YES\\
+(i) & \texttt{y$\sim$z+w+x} & 0.9554 & NO\\
+\hline
+\end{tabular}
+\caption{Results for (g), (h) and (i)}
+\end{table}
+
+As we can see, the conclusions change given which variables are in the model. In the models from part 
+(g) and (i), simple two sample t-test and adjusting by \emph{w} and \emph{x}, we reach the same conclusion: there is no significant difference between the means but in the fitted model
+ for part (h), adjusting only by \emph{w}, we conclude that there is a significant difference between the mean for both treatments. \\
+Adjusting by \emph{w}, once \emph{x} is in the model, there is no difference in the mean of
+ \emph{y} between treatment groups (no association). When we don't include \emph{x} in the model, we may be
+ reaching the wrong conclusion since we can be stating a false association between the two variables. This leads 
+us to think that \emph{x} can be a confounder variable for the association between \emph{z} 
+and \emph{y} (considering the baseline in the model).
+
+\end{enumerate}
+
+\end{document}
