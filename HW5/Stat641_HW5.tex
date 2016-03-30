@@ -1,0 +1,233 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=1in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 5}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{November 5, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{(1)} 
+We observe the following:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{lcccc}
+  \hline
+ & DFS & Recurrence & Dead & Total \\ 
+  \hline
+	Treatment 1 & 33 & 17 & 41 & 91\\
+	Treatment 2 & 44 & 18 & 25 & 87\\
+   \hline
+	Total  & 77 & 35 & 66 & 178\\
+   \hline
+\end{tabular}
+\caption{Results}
+\end{table}
+\begin{enumerate}
+\item[(a)] Mean Ranks: \\
+DRS: $\frac{1 + 77}{2} = \frac{78}{2} = 39$ \\
+Recurrence: $\frac{78 + 112}{2} = \frac{190}{2} = 95$\\
+Dead: $\frac{113+178}{2} = \frac{291}{2} = 145.5$
+Rank sum in group 2: $$T_2=44\cdot\frac{78}{2}+18\cdot\frac{190}{2}+25\cdot\frac{291}{2}=7063.5$$
+Expected rank sum$=87\cdot\frac{179}{2}=7786.5$
+$$T_2-E(T_2)=7063.5-7786.5=-723$$
+Variance of $T_2$: 
+$$\frac{91\cdot 87}{178-1}\left[\frac{1}{178}\left\{ 77\left(\frac{78}{2}\right)^2 +35\left(\frac{190}{2}\right)^2 +66\left(\frac{291}{2}\right)^2\right\} - \frac{(178+1)^2}{4}\right]=101620.8 $$
+
+The test statistic is $$\frac{(T_2-E(T_2))^2}{\Var(T_2)} = \frac{(-723)^2}{101620.8} = 5.144$$ 
+This statistic has (asymptotically) a chi-square distribution with 1 df, and has a p-value of 0.023. 
+
+\item[(b)]
+Reject the null hypothesis of equality of treatments. Lower average rank in group 2 suggests that subjects in treatment group 2 tend to have
+better outcomes than those in treatment group 1, so treatment 2 is superior to treatment 1. 
+
+\end{enumerate}
+\noindent
+\textbf{(2)} 
+\begin{enumerate}
+\item[(a)]
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccccccccccccccc}
+\hline
+Obs 	& 0.2 & 0.8 & 1.9 & 2.2 & 2.6 & 2.8 & 3.9 & 5.1 & 7.1 & 7.7 & 8.2 & 12.3 & 18.8 & 21.8 & 27.1 & 39.7 \\
+Rank  	& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 \\ 
+Group	& C & C & C & C & C & E & C & E & E & E & C & E & E & C & E & E \\
+\hline
+\end{tabular}
+\end{table}
+For the Wilcoxon rank sum test statistic we need:
+\begin{eqnarray*}
+T_B &=&\sum_{i=1}^{n_B} R_{iB}=89\\
+E(T_B)&=&n_B\frac{n_A+n_B+1}{2}=68\\
+Var(T_B)&=& \frac{n_An_B(n_A+n_B+1)}{12}=90.667
+\end{eqnarray*}
+With this we get the test statistic $\frac{(T_2-E(T_2))^2}{Var(T_2)}=4.8639$, which is asymptotically chi-squared distributed, which yields a p-value of 0.02742. 
+\item[(b)] For each observation in group ``E'', $M_j$ is the number of ``C'' subjects that are smaller:
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccccccc}
+\hline
+Experimental 	& 2.8 & 5.1 & 7.1 & 7.7 & 12.3 & 18.8 & 27.1 & 39.7 \\
+$M_j$  		& 5 & 6 & 6 & 6 & 7 & 7 & 8 & 8 \\ 
+\hline
+\end{tabular}
+\end{table}
+The sum of the values in the second row is $5 + 6 + 6 + 6 + 7 + 7 + 8 + 8 = 53$. The expected value is $8 × 8/2 = 32$. Hence $U = 53 − 32 = 21$
+
+\item[(c)] T-test for comparing the two groups:
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+  \hline
+t-statistic & df (aprox.) & p-value\\
+\hline
+-1.9093 & 10.993 & 0.08265\\
+   \hline
+\end{tabular}
+\caption{t-test for unequal variances}
+\end{table}
+
+There is not enough evidence to reject the null hypothesis that the means between both groups are equal. 
+
+\end{enumerate}
+\noindent
+\textbf{(3)} 
+\begin{enumerate}
+\item[(a)] The effect of treatment on mortality can be tested by Pearson's chi-square test on
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Thu Nov  5 11:33:43 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & Alive & Dead \\ 
+  \hline
+Trt0 &  88 &  12 \\ 
+  Trt1 &  66 &  34 \\ 
+   \hline
+\end{tabular}
+\end{table}
+The test statistic is 13.665, with df 1, and p-value 0.0002. We reject the null hypothesis of no dependence. 
+
+\item[(b)] To examine the difference between treatment groups for the the survivors:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{Plotb.pdf}
+\end{center}
+\end{figure}
+A t-test does not reveal significant difference between the two treatment groups, conditioned on survival:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Thu Nov  5 11:59:08 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 10.5898 & 0.3422 & 30.94 & 0.0000 \\ 
+  zTrt1 & -0.5549 & 0.5228 & -1.06 & 0.2901 \\ 
+   \hline
+\end{tabular}
+\end{table}
+This is conditioned on survival, which is a post-randomization phenomenon. So, this cannot be considered as a causal effect of treatment, even if effect was significant.
+\item[(c)]
+Replacing the 'NAs' with 2 in the variable $y$, the boxplot for assessing the difference between treatments:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{Plotc.pdf}
+\end{center}
+\end{figure}
+Below is a model for assessing the difference between treatments
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Thu Nov  5 12:06:21 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 9.5590 & 0.4378 & 21.84 & 0.0000 \\ 
+  zTrt1 & -2.2560 & 0.6191 & -3.64 & 0.0003 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\item[(d)]
+(i) Difference in Mean scores is 2.256. The mean of group with Trt1 is lower than the group with Trt0. \\
+
+(ii) Median score of Trt0 is 9.5 and that of Trt1 is 8.1. The difference in median is 1.4 \\
+
+(iii) Hodges-Lehmann estimate is approximately 2.5 \\
+The mean difference of scores does not make sense because the response values for the ``dead'' people have been imputed. The median difference in response is more meaningful.
+\item[(e)] Death is a competing risk for non-fatal events. Once someone dies without a prior non-fatal event, they are no longer at risk for non-fatal events. Death may be associated with both treatment and non-fatal event process. The observed non-fatal event process is confounded by death. As ``censoring'', it is informative (not independent). It is impossible to statistically separate effects of treatment on non-fatal events from its effect on death (non-identifiability).
+
+\end{enumerate}
+\noindent
+\textbf{(4)} 
+The hypothesis of interest are $H_0:p\leq 0.15$ versus $H_1:p\geq 0.4$ where $p$ is the true success rate. 
+\begin{enumerate}
+\item[(a)] Under $H_0$: $Y_1\sim Bin (16,0.15)$, the stopping probability will be $$P(Y_1\leq 3)=0.7899.$$
+Under $H_1$: $Y_1\sim Bin (16,0.4)$, the stopping probability will be $$P(Y_1\leq 3)=0.0651.$$
+\item[(b)] We can think that $P(\text{reject }H_0)=1-P(\text{accept }H_0)$.\\
+Under $H_0$: $Y_1\sim Bin (16,0.15)$ and $Y_2\sim Bin (16,0.15)$:
+\begin{eqnarray*}
+P(\text{acept }H_0) &=& P(Y_1\leq 3)+P(3<Y_1<9,Y_1+Y_2\leq 8)\\
+&=& \sum_{i=0}^{3} P(Y_1=i)+\sum_{i=4}^{8}\left[P(Y_1=i)\sum_{j=0}^{8-i}P(Y_2=j)\right]\\
+&=& 0.7899 + 0.176\\
+&=& 0.9659
+\end{eqnarray*}
+So, $$P(\text{reject }H_0)=1-0.9659=0.0341.$$
+Under $H_1$: $Y_1\sim Bin (16,0.4)$ and $Y_2\sim Bin (16,0.4)$:
+\begin{eqnarray*}
+P(\text{acept }H_0) &=& P(Y_1\leq 3)+P(3<Y_1<9,Y_1+Y_2\leq 8)\\
+&=& \sum_{i=0}^{3} P(Y_1=i)+\sum_{i=4}^{8}\left[P(Y_1=i)\sum_{j=0}^{8-i}P(Y_2=j)\right]\\
+&=& 0.0651+0.0318\\
+&=& 0.0969
+\end{eqnarray*}
+So, $$P(\text{reject }H_0)=1-0.0969=0.9031.$$
+
+ 
+\item[(c)] The expected sample size can be derived by the fact that 
+\begin{eqnarray*}
+E(N)&=&m_1 P(\text{stopping at stage 1})+(m_1+m_2)P(\text{not stopping at stage 1})\\
+&=& m_1 P(\text{stopping at stage 1})+(m_1+m_2)(1-P(\text{stopping at stage 1}))\\
+&=& m_1+m_2-m_2P(\text{stopping at stage 1})
+\end{eqnarray*}
+For $p=0.15$ then $P(\text{stopping at stage 1})=0.7899$ 
+so the expected sample size is\\ $E(N)=32-16\cdot 0.7899=19.3616\approx 20$.\\
+For $p=0.15$ then $P(\text{stopping at stage 1})=0.7899$ 
+so the expected sample size is\\ $E(N)=32-16\cdot 0.0651=30.9584\approx 31$.\\
+\item[(d)] We can define $Y\sim Binom (32,p)$.\\
+The type I error rate will be 
+\begin{eqnarray*}
+P(\text{reject }H_0|H_0 \text{ is true})&=& P(Y>8|p=0.15)\\
+&=& 1-P(Y\leq 8|p=0.15) \\
+&=& 0.0413
+\end{eqnarray*}
+The type II error rate will be 
+\begin{eqnarray*}
+P(\text{not reject }H_0|H_1 \text{ is true})&=& P(Y\leq 8|p=0.4)\\
+&=& 0.0575
+\end{eqnarray*}
+The advantage of the two stage trial is that gives us the option to (possibly) treat fewer patients since we can stop in stage 1 if the null hypothesis is true.  
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,176 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 7}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{December 3, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{(1)} $A: 3.0, 1.7, 4.6, 3.6, 1.2, 3.1$, \\$B: 3.9, 6.7, 7.5, 3.4, 8.8, 9.6$ \\
+The randomization test yields a p-value of 0.0055, and the Wilcoxon rank sum test yields a p-value 0.0076. Below is the histogram of the randomization test.
+\begin{figure}[H]
+\centering
+\includegraphics[scale = 0.4]{Plot1.pdf}
+\end{figure}
+
+\noindent
+\textbf{(2)}
+\begin{enumerate}
+\item[(a)] Since within each block of size 6 we randomly allocate 3 to each of the two treatments, the size of the reference set will be $\binom{6}{3}\times \binom{6}{3}=400$.
+\item[(b)] In this case, $E(x_1)=\frac{3\cdot 3}{6}=1.5$ and $E(x_2)=\frac{2\cdot 3}{6}=1$. The possible number of deaths that block 1 and block 2 can take are $\{0,1,2,3\}$ and $\{0,1,2\}$, respectively. With this, the sample space for $U(0)=\sum_j x_j-E(x_j)$ is $\{-2.5,-1.5,-0.5,0.5,1.5,2.5\}$.\\
+Under the assumption that $x_j$ follows an hypergeometric distribution: \\
+\noindent
+Block 1:
+\begin{eqnarray*}
+P(x_1=0)&=&\dfrac{\binom{6-3}{3-0}\binom{3}{0}}{\binom{6}{2}}=0.05\\
+P(x_1=1)&=&\dfrac{\binom{6-3}{3-1}\binom{3}{1}}{\binom{6}{2}}=0.45\\
+P(x_1=2)&=&\dfrac{\binom{6-3}{3-2}\binom{3}{2}}{\binom{6}{2}}=0.45\\
+P(x_1=3)&=&\dfrac{\binom{6-3}{3-3}\binom{3}{3}}{\binom{6}{2}}=0.05
+\end{eqnarray*}
+\noindent
+Block 2:
+\begin{eqnarray*}
+P(x_2=0)&=&\dfrac{\binom{6-3}{2-0}\binom{3}{0}}{\binom{6}{3}}=0.2\\
+P(x_2=1)&=&\dfrac{\binom{6-3}{2-1}\binom{3}{1}}{\binom{6}{3}}=0.6\\
+P(x_2=2)&=&\dfrac{\binom{6-3}{2-2}\binom{3}{2}}{\binom{6}{3}}=0.2
+\end{eqnarray*}
+Now,
+\begin{eqnarray*}
+P(U(0)=-2.5) &=& P(x_1=0,x_2=0) = \frac{1}{20}\cdot\frac{1}{5} = \frac{1}{100}\\
+P(U(0)=-1.5) &=& P(x_1=0,x_2=1)+P(x_1=1,x_2=0) = \frac{1}{20}\cdot\frac{3}{5} + \frac{9}{20}\cdot\frac{1}{5} = \frac{12}{100}\\
+P(U(0)=-0.5) &=& P(x_1=0,x_2=2)+P(x_1=1,x_2=1)+P(x_1=2,x_2=0)  = \frac{9}{20}\frac{1}{5} + \frac{9}{20}\frac{3}{5} + \frac{1}{20}\frac{1}{5} = \frac{37}{100}\\
+P(U(0)=0.5) &=& P(x_1=1,x_2=2)+P(x_1=2,x_2=1)+P(x_1=3,x_2=0) = \frac{37}{100}\\
+P(U(0)=1.5) &=& P(x_1=2,x_2=2)+P(x_1=3,x_2=1) = \frac{12}{100}\\
+P(U(0)=2.5) &=& P(x_1=3,x_2=2) = \frac{1}{100}
+\end{eqnarray*}
+So, the corresponding sampling probabilities under the randomization distribution are:
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccccc}
+  \hline
+$U(0)$ & -2.5 & -1.5 & -0.5 & 0.5 & 1.5 & 2.5 \\
+  \hline
+Probability & 0.01 &0.12& 0.37& 0.37& 0.12& 0.01\\
+   \hline
+\end{tabular}
+\caption{Probability distribution of $U(0)$.}
+\end{table}
+
+\item[(c)] For the observed data, $U(0)=1.5+1$ so the one sided randomization p-value is $P(U(0)\geq 2.5)=0.01$.
+\end{enumerate}
+
+\noindent
+\textbf{(3)} \\
+\noindent
+(a) The estimate for $\beta$ unadjusted for \texttt{w}:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  2 23:07:57 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 119.6000 & 6.0435 & 19.79 & 0.0000 \\ 
+  z & 16.3067 & 8.5468 & 1.91 & 0.0614 \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{y}$\sim$\texttt{z}, Std. Error 33.1}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  2 23:15:42 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 61.3529 & 10.3940 & 5.90 & 0.0000 \\ 
+  z & 16.3067 & 6.6287 & 2.46 & 0.0169 \\ 
+  w & 20.3187 & 3.2362 & 6.28 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{y}$\sim$\texttt{z+w}, Std. Error 25.67}
+\end{table}
+
+The unadjusted and adjusted estimates of $\beta$ are identical. This is a consequence of the permuted block randomization that guarantees that the distribution of $w$ is identical for the two treatment groups. The standard errors for $\beta$ are different; the SE of the adjusted $\beta$ 
+is smaller because the adjusted model accounts for the variability explained by $w$, whereas the unadjusted model does not. The additional variability accounted for by the adjusted model is reflected in the smaller residual standard error (25.67 versus 33.1)
+
+\noindent
+(b) Sizes of the reference sets are:\\
+i. If we have complete randomization, we will have $2^{60}$ possible allocations of treatments. \\
+ii. If we have a random allocation rule where each treatment is assigned 30 subjects, we will have ${60 \choose 30}$ possible allocation of treatments. \\
+iii. With blocks of size 4, we would have 15 in total, each one with size ${4 \choose 2}$. In total there are ${4 \choose 2}^{15}$ possible allocations of treatments. \\
+
+\noindent
+(c) Below is a summary of randomization test results:
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+\hline
+Randomization Distribution & Variance & Std. Error &  p-value \\ 
+\hline
+Complete Randomization & 75.01 & 8.66 & 0.0665\\
+Random Allocation Rule & 77.89 & 8.83 & 0.0639 \\
+Permuted Block Randomization &49.25  & 7.02 & 0.018\\
+\hline
+\end{tabular}
+\caption{Simulation Results for $\hat{\beta}$}
+\end{table}
+The SEs for complete randomization and the random allocation rule are comparable to one another and to the variance from the unadjusted model in part (a). The SE for permuted block randomization is smaller than the other two and comparable to the SE from the adjusted model in part (a). \\
+
+\noindent
+\textbf{(4)} \\
+If the next subject is allocated to group 1, the table will be:
+\begin{table}[H]
+\centering
+\begin{tabular}{cccccc}
+\hline
+& \multicolumn{2}{c}{Smoker} & \multicolumn{2}{c}{Sex} & \\
+Group & Y & N & M & F & Total \\
+\hline
+1 & 15 & 27 & 19 & 23 & 42 \\
+2 & 16 & 28 & 21 & 23 & 44 \\
+\hline
+\end{tabular}
+\caption{If next subject assigned to Group 1}
+\end{table}
+so $G_1 = |27 - 28| + |23 - 23| = 1.$ \\
+If the next subject is allocated to group 2, the table will be:
+\begin{table}[H]
+\centering
+\begin{tabular}{cccccc}
+\hline
+& \multicolumn{2}{c}{Smoker} & \multicolumn{2}{c}{Sex} & \\
+Group & Y & N & M & F & Total \\
+\hline
+1 & 15 & 26 & 19 & 22 & 42 \\
+2 & 16 & 29 & 21 & 24 & 44 \\
+\hline
+\end{tabular}
+\caption{If next subject assigned to Group 1}
+\end{table}
+so $G_2 = |26 - 29| + |22 - 24| = 5.$ \\
+Therefore, the next subject should be allocated to group 1.
+
+\end{document}
+
+

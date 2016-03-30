@@ -1,0 +1,255 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=1in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 2}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{October 1, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{Problem 1} 
+\begin{itemize}
+\item[(a)] Let $\beta$ be the true treatment effect. Ignoring $W$, following is a test of the hypothesis $H_0: \beta = 0$
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & 6.7826 & 0.2960 & 22.91 & $\sim 0$ \\ 
+z1 & \textbf{0.5984} & 0.4186 & 1.43 & \textbf{0.1561} \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{$x \sim z$}}
+\end{table}
+With a p-value of $0.1561$, we conclude that there is no enough evidence to reject the null hypothesis.
+
+\item[(b)]
+Adjusting by \emph{W} the results are:
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & 5.4793 & 0.2372 & 23.10 & $\sim 0$ \\ 
+  z1 & \textbf{0.7831} & 0.2109 & 3.71 & \textbf{0.0003} \\ 
+  w2 & -0.3908 & 0.2983 & -1.31 & 0.1933 \\ 
+  w3 & 0.7784 & 0.3023 & 2.57 & 0.0116 \\ 
+  w4 & 4.0343 & 0.2839 & 14.21 & $\sim 0$ \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{$x \sim z + w$}}
+\end{table}
+
+With this, $\hat{\beta}=0.7831$ and the t-test for $H_0:\beta=0$ is $3.71$ with an associated p-value close
+to zero. We reject the null hypothesis and conclude that there is a treatment difference, once adjusted for the levels of $W$.
+
+\item[(c)]
+From (b), we have the following linear model: 
+$$X_i=\alpha+\beta z_i+\gamma_2 I\{w_i=2\}+\gamma_3 I\{w_i=3\}+\gamma_4 I\{w_i=4\}+\epsilon_i,$$
+where $\epsilon_i\stackrel{iid}{\sim}N(0,\sigma^2)$ and $i=1,\ldots,n$.
+Hence,
+\begin{eqnarray*}
+\text{If }z_i=0&:& \mu_0=E(X_i|w_i)=\alpha+\gamma_2 I\{w_i=2\}+\gamma_3 I\{w_i=3\}+\gamma_4 I\{w_i=4\}\\
+\text{If }z_i=1&:& \mu_1=E(X_i|w_i)=\alpha+\gamma_2 I\{w_i=2\}+\gamma_3 I\{w_i=3\}+\gamma_4 I\{w_i=4\}+\beta
+\end{eqnarray*}
+Since $\mu_1=\mu_0+\beta$, we express the likelihood in terms of two groups as follows
+$$\log \ell(\mu_0,\mu_1)=-\log(2\pi\sigma^2)\left(\frac{n_0+n_1}{2}\right)
+-\frac{1}{2\sigma^2}\sum_{i=1}^{n_0}(x_i-\mu_0)^2-\frac{1}{2\sigma^2}\sum_{i=1}^{n_1}(x_i-\mu_1)^2$$, 
+where, $n_0$ corresponds to treatement $z_i=0$ and $n_1$ corresponds to treatment $z_i=1$ and $n=n_0+n_1$. \\
+Under $H_0$, we have that $\mu_0=\mu_1$, so the likelihood reduces to 
+$$\log \ell(\mu_0)=-\log(2\pi\sigma^2)\left(\frac{n_0+n_1}{2}\right)
+-\frac{1}{2\sigma^2}\sum_{i=1}^{n_0}(x_i-\mu_0)^2-\frac{1}{2\sigma^2}\sum_{i=1}^{n_1}(x_i-\mu_0)^2$$
+The MLE of $\mu_0$ under $H_0$ is:
+\begin{eqnarray*}
+ \frac{\partial \log \ell(\mu_0)}{\partial \mu_0}&=& \frac{1}{\sigma^2}\sum_{i=1}^{n_0}(x_i-\mu_0)+\frac{1}{\sigma^2}\sum_{i=1}^{n_1}(x_i-\mu_0)=0\\
+&\Rightarrow& \tilde{\mu_0}=\frac{n_0\bar{x}_0+n_1\bar{x}_1}{n_0+n_1}
+\end{eqnarray*}
+which is a maximum since $ \frac{\partial^2 \log \ell(\mu_0)}{\partial \mu_0^2} = -\frac{1}{\sigma^2}(n_0+n_1)<0$.\\
+Replacing $\tilde{\mu}_0$ on the score function we obtain $$U_\beta(0)=\dfrac{n_1n_0(\bar{x}_1-\bar{x}_0)}{\sigma^2(n_0+n_1)}$$
+Since $Var(\bar{x}_1-\bar{x}_0)=\frac{\sigma^2}{n_1}+\frac{\sigma^2}{n_0}$, the Fisher Information is 
+$$I_\beta(0)=\dfrac{n_1n_0}{\sigma^2(n_0+n_1)}$$ 
+Since MSE is an unbiased estimator of the variance of the linear model fitted in part (b), we have $\hat{\sigma}^2=1.098$ and obtain:
+\begin{table}[H]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & $U_k(0)$ & $I_k(0)$ \\ 
+  \hline
+$W=1$ & 2.06 & 5.94 \\ 
+$W=2$ & 4.83 & 5.23 \\ 
+$W=3$ & 4.67 & 4.97 \\ 
+$W=4$ & 6.04 & 6.34 \\ 
+   \hline
+\end{tabular}
+\caption{Score Functions and Fisher Information for each stratum of $W$}
+\end{table}
+
+\item[(d)] A score test for $H_0: \beta = 0$ is given by:
+$$R_n=\dfrac{[\sum_k U_k(0)]^2}{\sum_k I_k(0)}=13.785,$$ which follows a $F$ distribution
+ with 1 and 95 degrees of freedom. The p-value associated is $0.000346$, same as in (b). Notice that the value of the \emph{F} test statistic is the same as the \emph{t} statistics from part (b) squared. We reject the null hypothesis with a 95\% confidence.
+\end{itemize}
+
+\noindent
+\textbf{Problem 2} 
+\begin{itemize}
+\item[(a)] Following is the contingency table for this problem
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlcr}
+  \hline
+ & A & B & Total\\ 
+  \hline
+Alive &  27=$X_1$ &  36 & 63=$n_1$ \\ 
+  Death &  22 &   8& 30=$n_0$ \\ 
+\hline
+ &  49=$m$ &   44& 93=$N$\\
+   \hline
+\end{tabular}
+\caption{Ignoring Strata}
+\end{table}
+\newpage
+The uncorrected Score Test Statistic (Pearson chi-squared) is given by 
+$$R_n=\dfrac{(X_1 N-mn_1)^2N}{n_0n_1m(N-m)} = 7.572$$ 
+with an associated p-value of $0.0059$. We conclude that there is a difference in overall mortality between treatments A and B. 
+
+\item[(b)] The stratified Score Test is given by $$R_n=\dfrac{[\sum_k U_k(0)]^2}{\sum_k I_k(0)},$$
+in this case $k=3$:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrr}
+  \hline
+ & $U_k(0)$ & $I_k(0)$ \\ 
+  \hline
+Stratum 1 & -1.93 & 1.30 \\ 
+Stratum 2 & -1.88 & 1.14 \\ 
+Stratum 3 & -1.83 & 0.96 \\ 
+   \hline
+\end{tabular}
+\caption{Score Functions and Fisher Information per Stratum}
+\end{table}
+
+Which gives a result of $R_n=9.356$ with an associated p-value of 
+0.0022 and we conclude that there is a difference in overall mortality between treatments A and B even after
+we adjust for the different Stratum.
+\end{itemize}
+
+\noindent
+\textbf{Problem 3} 
+\begin{itemize}
+\item[(a)]
+Below is the Kaplan-Meier estimate of survival $\hat{S}(t)$, for the two groups combined
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Oct  1 10:15:39 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+time & n.risk & n.event & n.censor & survival \\ 
+  \hline
+8 & 20 & 0 & 1 & 1.0000 \\ 
+  9 & 19 & 1 & 0 & 0.9474 \\ 
+  11 & 18 & 0 & 1 & 0.9474 \\ 
+  12 & 17 & 1 & 0 & 0.8916 \\ 
+  13 & 16 & 1 & 0 & 0.8359 \\ 
+  14 & 15 & 2 & 0 & 0.7245 \\ 
+  16 & 13 & 1 & 1 & 0.6687 \\ 
+  18 & 11 & 0 & 1 & 0.6687 \\ 
+  19 & 10 & 0 & 1 & 0.6687 \\ 
+  22 & 9 & 0 & 1 & 0.6687 \\ 
+  23 & 8 & 1 & 1 & 0.5851 \\ 
+  24 & 6 & 1 & 0 & 0.4876 \\ 
+  26 & 5 & 1 & 0 & 0.3901 \\ 
+  28 & 4 & 1 & 0 & 0.2926 \\ 
+  29 & 3 & 0 & 1 & 0.2926 \\ 
+  30 & 2 & 1 & 0 & 0.1463 \\ 
+  31 & 1 & 1 & 0 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\end{table}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.6]{Plot3a.pdf}
+\end{center}
+\end{figure}
+
+\item[(b)]
+Variance of Kaplan-Meier's estimate of the survival function is given by:
+\[ \hat{\Var}(\hat{S(t)})= \{\hat{S}(t)\}^2 \sum_{j: t_j^* \leq t} \frac{d_j}{n_j(n_j - d_j)} \]
+Below are variances and $95\%$ confidence intervals.
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Oct  1 10:50:35 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  time & $\hat{S}(t)$ & $\hat{\Var}(\hat{S(t)}$ & Lower & Upper \\ 
+  \hline
+  9 & 0.9474 & 0.0026 & 0.8521 & 1.0000 \\ 
+  12 & 0.8916 & 0.0052 & 0.7604 & 1.0000 \\ 
+  13 & 0.8359 & 0.0075 & 0.6821 & 1.0000 \\ 
+  14 & 0.7245 & 0.0110 & 0.5452 & 0.9626 \\ 
+  16 & 0.6687 & 0.0123 & 0.4834 & 0.9252 \\ 
+  23 & 0.5851 & 0.0155 & 0.3856 & 0.8880 \\ 
+  24 & 0.4876 & 0.0187 & 0.2814 & 0.8448 \\ 
+  26 & 0.3901 & 0.0196 & 0.1931 & 0.7879 \\ 
+  28 & 0.2926 & 0.0181 & 0.1187 & 0.7213 \\ 
+  30 & 0.1463 & 0.0152 & 0.0280 & 0.7646 \\ 
+  31 & 0.0000 &  &  &  \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+\item[(c)]
+Below is the log-rank test to assess equality of treatments: 
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Oct  1 11:09:49 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  & N & Observed & Expected & $\frac{U(0)^2}{\I(0)} = \frac{(O - E)^2}{V}$ \\ 
+  \hline
+  grp A & 10 & 6 & 8.2597 & 2.4071 \\ 
+  grp B & 10 & 6 & 3.7403 & 2.4071 \\ 
+   \hline
+\end{tabular}
+\end{table}
+With p-value $0.12079$, we do not have sufficient evidence to reject the null hypothesis.\\
+
+Below is the Gehan-Wilcoxon test to assess equality of treatments: 
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Thu Oct  1 11:20:21 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrr}
+  \hline
+  & N & Observed & Expected & $\frac{(O - E)^2}{V}$ \\ 
+  \hline
+  grp A & 10 & 3 & 4.8135 & 3.8207 \\ 
+  grp B & 10 & 5 & 2.9923 & 3.8207 \\ 
+   \hline
+\end{tabular}
+\end{table}
+With p-value 0.0506 we do not have sufficient evidence to reject the null hypothesis.
+
+\end{itemize}
+\end{document}

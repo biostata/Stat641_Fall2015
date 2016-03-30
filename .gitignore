@@ -24,5 +24,9 @@ Data
 Data/*
 fromConi
 LectureNotes
+fromJared
+*.aux
+*.log
+*.pdf
 
 

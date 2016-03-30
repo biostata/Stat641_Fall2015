@@ -1,0 +1,442 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.8in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Final Exam}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{December 17, 2015}
+%\date{}
+
+\maketitle
+
+\begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item 
+\begin{enumerate}
+\item[(a)] Below is a plot of $x_1,\ x_2$ versus $x_0$
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.45, page = 1]{Plot1a.pdf}
+\end{center}
+\caption{$x_1,\ x_2$ versus $x_0$}
+\label{fig:Fig1a}
+\end{figure}
+
+\item[(b)] Below are the model summaries of fitting $x_1$ from three different approaches:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 11:47:34 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 60.9107 & 1.8094 & 33.66 & 0.0000 \\ 
+  z & 3.9026 & 2.5159 & 1.55 & 0.1265 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting $x_1 \sim z$; Residual standard error: $9.575$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 11:50:23 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & -0.2714 & 0.9915 & -0.27 & 0.7853 \\ 
+  z & 3.5914 & 1.3786 & 2.61 & 0.0117 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting $x_1 - x_0 \sim z$, Residual standard error: $5.247$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 11:51:14 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 13.7195 & 3.6147 & 3.80 & 0.0004 \\ 
+  z & 3.6626 & 1.2251 & 2.99 & 0.0042 \\ 
+  x0 & 0.7713 & 0.0573 & 13.46 & 0.0000 \\ 
+   \hline
+\end{tabular}
+\caption{Fitting $x_1 \sim x_0 + z$, Residual standard error: $4.662$}
+\end{table}
+
+Clearly baseline variable $x_0$ has a strong correlation with the outcome $x_1$. So, it makes sense that model 3 has the least residual standard error, as well as the least standard error of the coefficient of treatment. Models 2 and 3 are better than model 1 since they both include the baseline variable. However, in model 2, instead of estimating the dependence of $x_1$ on $x_0$, we force it to be 1. In other words, model 2 will yield: $x_1 = x_0 + \beta z $, whereas, model 3 would estimate the coefficient of $x_0$ as well. Model 3 would be the best choice. The final conclusion would be that treatment 1 does have have statistically significant contribution to the treatment, when adjusted for baseline. \\
+
+Here, the baseline, $x_0$ is not a confounder because the trial was randomized. However, it is interesting to observe that even after randomization, the baseline variables exhibit a difference in their means and variances between the treatment groups. Response variables $x_1$ and $x_2$ exhibit the differences in the same direction. 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.35, page = 2]{Plot1a.pdf}
+\includegraphics[scale = 0.35, page = 3]{Plot1a.pdf}
+\end{center}
+\caption{Baseline and Response vs Treatments}
+\label{fig:Fig1b}
+\end{figure}
+
+\item[(c)] Below are the model summaries of fitting $x_2$ from three different approaches:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:14:44 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 61.6179 & 2.0630 & 29.87 & 0.0000 \\ 
+  z & 6.8721 & 2.8685 & 2.40 & 0.0200 \\ 
+   \hline
+\end{tabular}
+\caption{Model 1: Fitting $x_2 \sim z$; Residual standard error: $10.92$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:15:45 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 0.4357 & 2.6931 & 0.16 & 0.8721 \\ 
+  z & 6.5610 & 3.7446 & 1.75 & 0.0852 \\ 
+   \hline
+\end{tabular}
+\caption{Model 2: Fitting $x_2 - x_0 \sim z$, Residual standard error: $14.25$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:16:59 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 52.7430 & 8.4511 & 6.24 & 0.0000 \\ 
+  z & 6.8270 & 2.8644 & 2.38 & 0.0206 \\ 
+  x0 & 0.1451 & 0.1340 & 1.08 & 0.2836 \\ 
+   \hline
+\end{tabular}
+\caption{Model 3: Fitting $x_2 \sim x_0 + z$, Residual standard error: $10.9$}
+\end{table}
+
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 12:17:49 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+(Intercept) & 47.7695 & 9.4652 & 5.05 & 0.0000 \\ 
+  z & 5.4993 & 3.0791 & 1.79 & 0.0797 \\ 
+  x0 & -0.1346 & 0.2768 & -0.49 & 0.6288 \\ 
+  x1 & 0.3625 & 0.3143 & 1.15 & 0.2539 \\ 
+   \hline
+\end{tabular}
+\caption{Model 4: Fitting $x_2 \sim x_0 + x_1 + z$, Residual standard error: $10.87$}
+\end{table}
+ 
+\item[(d)] When fitting $x_2$ with treatment, controlling for baseline does not have any effect on the estimate or standard error of $\beta_z$. In addition to the three approaches suggested a fourth model was fit, where $x_1$ was included as a co-variate. However, it did not seem to improve the fit. From fig (\ref{fig:Fig1a}) it is clear that $x_2$ is not as correlated with $x_0$ as $x_1$ is. So, the model fit result is not surprising. \\
+
+For both $x_1$ and $x_2$ models 3 would be the preferred approach, which controls for baseline. The conclusion in both cases is that the treatment does have a statistically significant effect on the response. 
+\end{enumerate}
+
+\rule{\textwidth}{1pt}
+\vspace{1in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] The observed failure times are:\\
+Group 1: 8, 11, 21+, 35, 38 \\
+Group 2: 37, 41+, 76, 83+, 119\\
+Below is the observed data, with the scores:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec 16 20:31:08 2015
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrrrrr}
+  \hline
+ & time & status & group & n.risk ($R_j$)& $\frac{1}{R_j}$ & $\frac{1}{R_j}\cdot \delta_{\text{failure}}$ & Score ($C_j$ \\ 
+  \hline
+  1 & 8 & 1 & 1 & 10 & 0.1000 & 0.1000 & -0.9000 \\ 
+  2 & 11 & 1 & 1 & 9 & 0.1111 & 0.2111 & -0.7889 \\ 
+  3 & 21 & 0 & 1 & 8 & 0.1250 & 0.2111 & 0.2111 \\ 
+  4 & 35 & 1 & 1 & 7 & 0.1429 & 0.3540 & -0.6460 \\ 
+  6 & 37 & 1 & 2 & 6 & 0.1667 & 0.5206 & -0.4794 \\ 
+  5 & 38 & 1 & 1 & 5 & 0.2000 & 0.7206 & -0.2794 \\ 
+  7 & 41 & 0 & 2 & 4 & 0.2500 & 0.7206 & 0.7206 \\ 
+  8 & 76 & 1 & 2 & 3 & 0.3333 & 1.0540 & 0.0540 \\ 
+  9 & 83 & 0 & 2 & 2 & 0.5000 & 1.0540 & 1.0540 \\ 
+ 10 & 119 & 1 & 2 & 1 & 1.0000 & 2.0540 & 1.0540 \\ 
+   \hline
+\end{tabular}
+\end{table}
+$T = \sum_{\text{group } 2} C_i = 2.4032$.\\
+
+Below is a histogram of the randomization distribution of the statistic $T = \sum_{\text{group } 2} C_i$, with 10,000 permutations:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.45]{Plot2.pdf}
+\end{center}
+\caption{Randomization distribution of $T$, $T_{\text{obs}} = 2.4032$}
+\label{fig:Fig2a}
+\end{figure}
+So, the randomization p-value is $0.0378$.\\
+
+The variance of the randomization distribution is 1.3897. The $\chi^2(1)$ test statistic is $\frac{T^2_{\text{obs}}}{\Var(T_{\text{randomized}})} = \frac{2.4032^2}{1.3897} = 4.1556$. The chi-square p-value is $\Prob(4.1557 > \chi^2(1)) = 0.0415$.  
+
+\item[(b)] The log-rank test comparing the two groups yields"
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Mon Dec 14 21:07:29 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & N & Observed & Expected & V4 \\ 
+  \hline
+group=1 & 5 & 3 & 1.3571 & 5.2488 \\ 
+  group=2 & 5 & 1 & 3.3619 & 5.2488 \\ 
+   \hline
+\end{tabular}
+\caption{Log-rank test, p-value: 0.022}
+\end{table}
+With p-value 0.022, reject the null hypothesis of equality of groups. 
+\item[(c)] All three tests yield the same conclusion, rejecting the null hypothesis of equality of the two groups. The log-rank test uses normality assumption. However, with sample size of 5 in each group, this test is not the most suitable. The randomization test should be used.
+\end{enumerate}
+
+\rule{\textwidth}{1pt}
+\vspace{1in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+Let $\hat{\beta}_u$ be the unadjusted estimate of $\beta$, and $\hat{\beta}_a$ be the adjusted estimate of $\beta$. Let $\bar{w}_o$ and $\bar{w}_1$ be the means of $w$ in the groups $z = 0$ and $z = 1$ respectively. Then,
+\begin{eqnarray*}
+\hat{\beta}_a & = & \hat{\beta}_u - \hat{\gamma}(\bar{w}_1 - \bar{w}_0) \\
+              & = & 0.7545 - 0.4250 \cdot 0.1574 \\
+              & = & 0.6876
+\end{eqnarray*}
+$w$ cannot be a confounder because this is a randomized trial.
+
+\rule{\textwidth}{1pt}
+\vspace{1in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] Figures (2) and (3) in \cite{larosa2005intensive} illustrate the causal effect of higher dosage (80mg) of atorvastatin on reduction in major cardiovascular events. Table (1) in \cite{larosa2007safety} illustrate the causal effect of higher dosage (80mg) of atorvastatin on reduced levels of LDL cholesterol. However, from these two studies it is not clear if there exists a causal relationship between reduced levels of LDL cholesterol and lower risks of cardiovascular events. 
+
+\item[(b)] The discussion claims that ``observed benefit on major cardiovascular events in TNT is more closely related to achieved 
+on-treatment LDL cholesterol levels than drug dose per se''. However, the data should suggest otherwise. The data illustrates that benefit on major cardiovascular events is impacted by the drug dose, as also displayed in figure (2) in \cite{larosa2005intensive}. 
+\end{enumerate}
+
+\rule{\textwidth}{1pt}
+\vspace{1in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] 
+Assuming power = 90\%, $\beta = 0.1; \alpha = 0.025$ \\
+Assuming equal number of patients in each treatment group, $\xi_0=\xi_1=\frac{1}{2}$ \\
+Hazard ratio $= r = 0.8$ \\
+By Schoenfeld’s formula we have:
+\[ \dfrac{(Z_{1-\alpha}+Z_{1-\beta})^ 2}{\xi_0\xi_1(\log r)^2} = \dfrac{3.24^ 2}{(1/2)^2(\log 0.8)^2} = 844.09 \]
+
+%Assume no censoring. \\
+The hazard rate $\lambda$ for the control group is constant at .10/person-year. The active group will have a hazard of 0.8/person-year. Hence, the average of the control and active group hazards is 0.09/person-year; The cumulative hazard is $\Lambda(t) = 0.09t, \ 0 \leq t \leq 4$. \\
+The probability that a subject experiences an event before time $t$ is $1 - e^{-\Lambda(t)}$. If the total length of follow-up is $F$ and the length of the recruitment period is $R$, then the probability of an event is
+\begin{eqnarray*}
+\bar{\rho} &=& \frac{1}{R} \int_{F - R}^{F} 1 - e^{-\Lambda(s)}ds \\
+           &=& 1 - \frac{1}{R} \int_{F - R}^{F} e^{-0.09s} ds \\
+           &=& 1 + \frac{1}{0.09R}\left(e^{-0.09F} - e^{-0.09(F - R)} \right) \\
+           &=& 0.2356
+\end{eqnarray*}
+Hence, the total number of events required is 844 and the expected sample size is $\frac{844}{0.2356} = 3583$. 
+
+%If we assume Censoring times, $C_{ij}$ are uniformly distributed on interval $[F - R, F]$, then the expected sample size is given by:
+%\[ n = \frac{(Z_{1-\alpha}+Z_{1-\beta})^ 2 R \bar{\lambda}}{\left(R\bar{\lambda} - e^{-\bar{\lambda}(F - R)} + e^{-\bar{\lambda}F} \right) \xi_0\xi_1(\log r)^2} = \]
+
+\item[(b)] The hazard rate is $\bar{\lambda} = 0.09$ and the enrollment rate is $R = \frac{3583}{2} = 1791.5$ per year. The expected number of participants at any given time $0 \leq t \leq 2$ is given by 
+\[X(t) = \frac{R}{\bar{\lambda}}(1 - e^{-\bar{\lambda} t)\]
+Hence, the number of events in $t$ is $R\cdot t - X(t)$. After $t = 2$, there is no more enrollment. Hence, the time after study start at which these fractions of events are expected to accrue, are:
+\begin{table}[H]
+\centering
+\begin{tabular}{ccc}
+  \hline
+  Information Fraction &  Number of Events & Expected Time (years) \\ 
+  \hline
+  0.2000 & 169 & 1.48 \\ 
+  0.4000 & 338 & 2.12 \\ 
+  0.6000 & 507 & 2.71 \\ 
+  0.8000 & 676 & 3.34 \\ 
+  1.0000 & 844 & 4.00 \\ 
+  \hline
+\end{tabular}
+\end{table}
+
+\item[(c)] The critical values $b_k$, for $Z_k$ for rejecting $H_0: \mu \geq 0$ are:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Sat Dec 12 16:16:00 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+  Time &  Upper & Exit pr. & Diff. pr. & Nominal Alpha \\ 
+  \hline
+  0.2000 & 3.2905 & 0.0010 & 0.0010 & 0.0010 \\ 
+  0.4000 & 2.9404 & 0.0040 & 0.0030 & 0.0033 \\ 
+  0.6000 & 2.7211 & 0.0090 & 0.0050 & 0.0065 \\ 
+  0.8000 & 2.5481 & 0.0160 & 0.0070 & 0.0108 \\ 
+  1.0000 & 2.4011 & 0.0250 & 0.0090 & 0.0163 \\ 
+  \hline
+\end{tabular}
+\end{table}
+The critical values at $t_k = (0.2, 0.4, 0.6, 0.8, 1.0)$ are 3.2905, 2.9404, 2.7211, 2.5481, 2.4011.
+
+\item[(d)] The non-centrality parameter is
+\begin{eqnarray*}
+ \theta & = & \sqrt{\I}\log r \\
+        & = & \sqrt{D \xi_1 \xi_2} \log r \\
+        & = & \sqrt{844 \cdot 0.5 \cdot 0.5 } \log 0.8 \\
+        & = & 3.2413
+\end{eqnarray*}
+For any interim period $k$, $\Exp(Z_k) = \sqrt{t_k}\theta$. Hence,\\
+$\Exp(Z_1) = 1.4496$; 
+$\Exp(Z_2) = 2.05$; 
+$\Exp(Z_3) = 2.5107$; 
+$\Exp(Z_4) = 2.8991$; 
+$\Exp(Z_5) = 3.2413$ \\
+Hence, the critical values $a_k$, for rejecting $H_1: \mu \leq \log 0.8$ are:\\
+%$a_1 = -4.74, \ a_2 = -4.99,\ a_3 = -5.23,\ a_4 = -5.45,\ a_5 = -5.64$
+$a_1 = -1.2982,\ a_2 = -0.2676,\ a_3 = 0.4826,\ a_4 = 1.1098,\ a_5 = 1.6636$     
+%$a_1 = -1.84,\ a_2 = -0.89,\ a_3 = -0.21,\ a_4 = 0.35,\ a_5 = 0.84$
+
+\item[(e)] Power = $0.8283 + \sum_{k = 1}^5 \Prob(\text{Rejecting } H_0) = 0.8283 + 0.0380 = 0.8663$
+
+\item[(f)] A plot of the upper and the lower boundaries:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4]{Plot5f.pdf}
+\end{center}
+\caption{A plot of the upper and the lower boundaries}
+\end{figure}
+
+\item[(g)] In order for the two boundaries to match, $\theta_{\text{new}} = 3.979$. With this new non-centrality parameter, the power is 0.9629.
+\item[(h)] For this $\theta_{\text{new}}$, we need 1272 events, and hence require 5398 sample size.
+
+\end{enumerate}
+
+\rule{\textwidth}{1pt}
+\vspace{1in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Problem 6
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\item
+\begin{enumerate}
+\item[(a)] The log-rank Z-statistics are:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Sat Dec 12 20:36:27 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrr}
+  \hline
+  Period & $\chi^2$ & Z \\ 
+  \hline
+  1 & 0.0203 & -0.1425 \\ 
+  2 & 0.5249 & 0.7245 \\ 
+  3 & 1.7033 & 1.3051 \\ 
+  4 & 1.5506 & 1.2452 \\ 
+  5 & 9.2147 & 3.0356 \\ 
+  \hline
+\end{tabular}
+\end{table}
+Since the problem statement indicates that a positive $Z$ corresponds to benefit for treatment 1, we use the observed and expected values from the above to determine the sign. In each case, except for interim period 1, the observed number of deaths in group 1 is smaller than the expected, indicating that the observed treatment difference favors group 1.
+
+\item[(b)] Based on problem 5(h), where required number of events is 1853, the information fractions are $0.1241, 0.2472, 0.3400, 0.4317, 1.0000$ and the critical points are:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Sat Dec 12 21:00:32 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrr}
+  \hline
+  $t_k$ & Upper & Exit pr. & Diff. pr. & Nominal Alpha \\ 
+  \hline
+  0.1808 & 3.3468 & 0.0008 & 0.0008 & 0.0008 \\ 
+  0.3601 & 3.0066 & 0.0032 & 0.0024 & 0.0026 \\ 
+  0.4953 & 2.8688 & 0.0061 & 0.0029 & 0.0041 \\ 
+  0.6289 & 2.7361 & 0.0099 & 0.0038 & 0.0062 \\ 
+  1.0000 & 2.3434 & 0.0250 & 0.0151 & 0.0191 \\ 
+  \hline
+\end{tabular}
+\end{table}
+None of the Z-statistics of interim periods exceed the critical levels, so the stopping boundaries won't be crossed at any of the interim analysis. 
+
+\item[(c)] The information fractions based on observed data are $0.2018, 0.4018, 0.5526, 0.7018, 1.0000$. The critical value at the final analysis is 2.3667.
+
+\item[(d)] The Z-statistics at each of the interim analyses are within the monitoring boundaries, so the trial would not have stopped early on that basis. At the final analysis, the Z crosses the upper boundary, so we would have demonstrated that treatment 1 is superior to treatment 0.
+
+\item[(e)] For stage-wise, we need the probability of stopping early plus the probability of going to the end and observing a final Z at least as large as that observed. Using the upper bounds of the interim periods from part 6(b) and the final upper bound from part 6(c), the stage-wise p-value is 0.0100. \\
+
+To estimate the LR orderings p-values, we need to estimate the exit probabilities: \\
+LR1 exit: $0.0001925816$\\
+LR2 exit: $0.0001925816 0.0088435372$\\
+LR3 exit: $0.0001925816 0.0005709759 0.0083912392$\\
+LR4 exit: $0.0001925816 0.0005709759 0.0006812452 0.0079284263$\\
+LR5 exit: $0.0001925816 0.0005709759 0.0006812452 0.0008849474 0.0076769178$\\
+Using the final exit probability in each set, the Likelihood-ratio p-value is 0.0330. 
+
+\item[(f)] Conditional power is given by:
+\[ 1-\Phi \left(\dfrac{b_K-B(t)-(1-t)\theta}{\sqrt{1-t}}\right) \]
+$K = 5; b_K = 2.3667; \theta = -\log(0.8)\sqrt{1140/4} = 3.767$ \\ 
+$Z(t) = (-0.1425, 0.7245, 1.3051, 1.2452, 3.0356);$ \\
+$B(t) = Z(t)\sqrt{t} = (-0.0640, 0.4592, 0.9702, 1.0431, 3.0356) $
+
+Hence, the conditional powers at interim analysis are: \\
+Analysis 1: 0.7406 \\
+Analysis 2: 0.6728 \\
+Analysis 3: 0.6670 \\
+Analysis 4: 0.3570 \\
+
+Since all the conditional powers are above 20\%, the trial would continue till its end, as planned. 
+
+\end{enumerate}
+
+\end{enumerate}
+
+\bibliographystyle{plain} 
+\bibliography{bibTex_Reference_641}
+
+
+\end{document}
+
+

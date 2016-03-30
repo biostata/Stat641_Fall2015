@@ -1,0 +1,185 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 6}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{November 19, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{(1)} \\
+(a) The means within each treatment group separately for periods 1 and 2 are
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Tue Nov 17 19:32:34 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrr}
+\hline
+& Period 1 & Period 2 \\ 
+\hline
+Trt A & 9.6625 & 22.7025 \\ 
+Trt B & 10.1000 & 22.9200 \\ 
+\hline
+\end{tabular}
+\caption{Means within group}
+\end{table}
+The estimate of the treatment difference assuming no carryover is:
+$$\dfrac{1}{2}[(10.1000-9.6625)+(22.9200-22.7025)]=0.3275.$$ \\
+\noindent
+(b) Fitting a regression model:
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & -3.4088 & 0.6695 & -5.09 & $\sim$0 \\ 
+  zB &  \textbf{0.3275} & \textbf{0.1412} & 2.32 & 0.0229 \\ 
+  period & 12.9300 & 0.1412 & 91.60 & $\sim$0 \\ 
+  ids02 & 1.7500 & 0.8927 & 1.96 & 0.0535 \\ 
+$\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ & $\vdots$ \\ 
+  ids80 & -1.4000 & 0.8927 & -1.57 & 0.1209 \\ 
+   \hline
+\end{tabular}
+\caption{Summary of \texttt{y}$\ \sim\ $\texttt{z + period + id}}
+\end{table}
+
+We can see that the estimate for the treatment difference is the same as in part (a) that assumes no carry over. In order to estimate correctly the standard error, the subject id was included in the model, resulting in a standard error of 0.1412.
+
+\noindent
+(c)
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Tue Nov 17 22:44:19 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{lcccc}
+  \hline
+ & Estimate & Std. Error & t value & p-value \\ 
+  \hline
+Intercept & 9.6625 & 0.4734 & 20.41 & 0.0000 \\ 
+  zB & 0.4375 & 0.6695 & 0.65 & 0.5153 \\ 
+   \hline
+\end{tabular}
+\end{table}
+The effect of treatment is not significant. 
+
+\noindent
+(d) The standard errors of the two estimates are quite different. For Cross-over analysis: SE = 0.1412; for Parallel group (period 1 only): SE = 0.6695. \\
+This suggests that there is high correlation between the period 1 and period 2 observations from each subject.  Because the cross-over model is based on within-subject differences, the subject-level effects are accounted for and the variability is significantly reduced providing higher power. \\
+\noindent\rule{16cm}{0.4pt} \\
+
+\noindent
+\textbf{(2)} 
+We observe the following
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+  \hline
+ & Failures & Success\\ 
+  \hline
+A & 273 & 1027\\ 
+B & 299 & 1001 \\ 
+\hline
+Total & 1300 & 1300\\
+   \hline
+\end{tabular}
+\caption{Results}
+\end{table}
+
+The estimates $\hat{p}_A=\frac{273}{1300}=0.21$, $\hat{p}_B=\frac{299}{1300}=0.23$ and $\widehat{OR}=1.1237$. Notice that $\hat{p}_A$ and $\hat{p}_B$ are both less than the assumed rate of 0.30. 
+
+\noindent
+(a) A 95\% CI for $p_A-p_B$ will be given by:
+$$CI(p_A-p_B):\left\{(\hat{p}_A-\hat{p}_B)\pm Z_{1-0.05/2}\widehat{SE}(\hat{p}_A-\hat{p}_B)\right\},$$
+where 
+\[ \widehat{SE}(\hat{p}_A-\hat{p}_B) = \sqrt{\frac{\hat{p}_A(1-\hat{p}_A)}{n_A}+\frac{\hat{p}_B(1-\hat{p}_B)}{n_B}} = 0.0162 \]
+With this, 
+\[ 95\%  ~CI(p_A-p_B) = (0.02-1.96\cdot 0.0162,0.02+1.96\cdot 0.0162) = (-0.0118,0.0518) \]
+Notice that $\delta=0.06\notin CI(p_A-p_B)$
+
+\noindent
+(b) A 95\% CI for $\log (OR)$ will be given by:
+$$CI(\log (OR)):\left\{\log (\widehat{OR})\pm Z_{1-0.05/2}\widehat{SE}(\log (\widehat{OR}))\right\},$$
+where 
+\[ \widehat{SE}(\log (\widehat{OR})) = \sqrt{\frac{1}{n_{11}}+\frac{1}{n_{12}}+\frac{1}{n_{21}}+\frac{1}{n_{22}}} = \sqrt{\frac{1}{273}+\frac{1}{1027}+\frac{1}{299}+\frac{1}{1001}} = 0.0948 \]
+With this, 
+\[ 95\%  ~CI(\log (OR)) = (\log(1.1237)-1.96\cdot 0.0948 , \log(1.1237)+1.96\cdot 0.0948) = (-0.0692,  0.3024) \]
+Notice that $\delta=0.272\in CI(\log (OR))$
+
+\noindent
+(c) Unlike a null hypothesis of equality, the hypothesis of inferiority (true treatment difference larger than $\delta > 0$) depends on the parameterization. In the case of equality
+$$p_B - p_A = 0 \implies \log(\frac{p_B}{p_A}) = 0 \iff \log\frac{p_B(1 - p_A)}{p_A(1 - p_B)} = 0$$ However, in the non-inferiority case, they are no longer equivalent. \\
+Also, as noted earlier, the estimates $\hat{p}_A$ and $\hat{p}_B$ are smaller than expected, hence increasing the variance estimation, hence shortening the length of the confidence interval, making it easier to exclude
+$delta$ for a fixed difference, $p_B - p_A$. \\
+\noindent\rule{16cm}{0.4pt} \\
+
+\noindent
+\textbf{(3)} 
+(a) Assuming power = 90\%, $\beta = 0.1$ \\
+$\alpha = 0.05$ \\
+Assuming equal number of patients in each treatment group, $\xi_0=\xi_1=\frac{1}{2}$ \\
+Since a new treatment is expected to reduce the rates by 25\%, $r=0.75$ \\
+By Schoenfeld’s formula we have:
+\[ \dfrac{(Z_{1-\alpha/2}+Z_{1-\beta})^ 2}{\xi_0\xi_1(\log r)^2} = \dfrac{3.24^ 2}{(1/2)^2(\log 0.75)^2} = 507.84 \]
+The sample size should be 508.\\
+\noindent
+(b) The hazard rate $\lambda$ for the control group is constant at .10/year during the first 6 months following MI and constant .04/year. The active group will have a hazard of 0.75/year for the first 6 months and 0.03/year thereafter. Hence, the average of the control and active group hazards is:
+\[ \bar{\lambda} = 0.0875/\text{year, if } t < 0.5, \text{and } 0.035/\text{year, if } t > 0.5\]
+The average cumulative hazard function is: 
+\begin{equation*}
+\Lambda(t) = \begin{cases}
+0.0875t &\text{if } t < 0.5 \\
+0.5 \cdot 0.0875 + (t-0.5) 0.035 = 0.02625 + 0.035t &\text{it } t \ge 0.5
+\end{cases}
+\end{equation*}
+The probability that a subject experiences an event before time $t$ is $1 - e^{-\Lambda(t)}$. If the total length of follow-up is $F$ and the length of the recruitment period is $R$, then the probability of an event is
+\begin{eqnarray*}
+\bar{\rho} &=& \frac{1}{R} \int_{F - R}^{F} 1 - e^{-\Lambda(s)}ds \\
+           &=& 1 - \frac{e^{-0.02625}}{R} \int_{F - R}^{F} e^{-0.035s} ds \\
+           &=& 1 + \frac{e^{-0.02625 - 0.035F}}{0.035R}\left(1 - e^{0.035R} \right)
+\end{eqnarray*}
+For design 1, $R = 1.5, F = 4; \implies \bar{\rho} = 0.1305 \implies n = \frac{507.84}{0.1305} \approx 3890 $ \\ \\
+For design 2, $R = 1.5, F = 4; \implies \bar{\rho} = 0.1073 \implies n = \frac{507.84}{0.1073} \approx 4733 $ \\
+\noindent\rule{16cm}{0.4pt} \\
+\noindent
+\textbf{(4)} 
+(a) In this case, $\alpha=0.05$, $\beta=0.1$, $\theta=p_A-p_B=0.06$, $\bar{p}=0.33$ and we will assume that $\xi_0=\xi_1=1/2$:
+\[ n = \dfrac{(Z_{1-\alpha/2}+Z_{1-\beta})^2\bar{p}(1-\bar{p})}{\xi_0\xi_1\theta^2} \approx 2582 \]
+Each group should be 1291.
+
+\noindent
+(b) Since $0.07<p_A<0.5$, $\sigma=\sqrt{\bar{p}(1-\bar{p})}$ will not be a fixed value because depends on $\bar{p}$ that would change as $p_A$ does.
+\begin{enumerate}
+\item[i.] The power function, for this case, will be defined as:
+$$\text{power}=\Phi\left(\dfrac{|\theta|\sqrt{n/4}}{\sigma}-Z_{1-\alpha/2}\right).$$
+\item[ii.] The power function, for this case, will be defined as:
+$$\text{power}=\Phi\left(|\theta|\sigma\sqrt{n/4}-Z_{1-\alpha/2}\right).$$
+\end{enumerate}
+\vspace{-0.6cm}
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.85]{power.pdf}
+\vspace{-0.6cm}
+\caption{Power as a function of true $p_A$.}
+\end{figure}
+
+The two curves differ since for i. (fixed constant risk difference) the power increases when the probability moves away from 0.5, and for ii. (fixed constant log-odds ratio) the power decreases when the probability moves away from 0.5.
+\end{enumerate}
+
+\end{document}

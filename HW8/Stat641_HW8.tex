@@ -1,0 +1,149 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=0.9in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 8}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{December 10, 2015}
+%\date{}
+
+\maketitle
+
+\begin{enumerate}
+\item[(a)] At interim analysis period 1:\\
+$n_0 = 135, n_1 = 145, W = 20792$. Since both $n_1$ and $n_0$ are large enough, $W \sim \mathcal{N}(\mu,\sigma^2)$, where, 
+\[ \mu = \frac{n_1(n_1 + n_0 + 1)}{2} = 20372.5, \ \ \sigma^2 = \frac{n_0 n_1(n_1 + n_0 + 1)}{12} = 458481.2\] 
+Testing the hypothesis: 
+\[ H_0: \mu_1 = \mu_0\ \text{  vs  } \ H_a: \mu_1 > \mu_0\]
+the normal approximation yields a p-value of 0.2678, and the Wilcoxon test gives p-value 0.268. \\
+\noindent
+At interim analysis period 2:\\
+$n_0 = 336, n_1 = 320, W = 110400, \mu = 105120, \sigma = 2426.26$. The normal approximation and the Wilcoxon test both yield a p-value of 0.0148. \\
+\noindent
+At final analysis period 3:\\
+$n_0 = 522, n_1 = 478, W = 247590, \mu = 239239, \sigma = 4562.21$. The normal approximation and the Wilcoxon test both yield a p-value of 0.0336. \\
+So, we reject the null hypothesis in favor of the alternative, $\mu_1 > \mu_0$
+\item[(b)] After generating 10,000 random samples of $\mathbf{T} = (T_1 - \Exp(T_1), T_2 - \Exp(T_2), T_3 - \Exp(T_3))$, the covariance and correlation matrices are
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  9 13:42:11 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+& $T_1 - \Exp(T_1)$ & $T_2 - \Exp(T_2)$ & $T_3 - \Exp(T_3)$ \\ 
+  \hline
+$T_1 - \Exp(T_1)$ & 455507 & 20095 & 50488 \\ 
+$T_2 - \Exp(T_2)$ & 20095 & 5952464 & -226825 \\ 
+$T_3 - \Exp(T_3)$ & 50488 & -226825 & 21361762 \\ 
+  \hline
+\end{tabular}
+\caption{Covariance matrix of $\mathbf{T}$}
+\end{table}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  9 13:26:50 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrr}
+\hline
+& $T_1 - \Exp(T_1)$ & $T_2 - \Exp(T_2)$ & $T_3 - \Exp(T_3)$ \\ 
+\hline
+  $T_1 - \Exp(T_1)$ & 1.0000 & 0.0122 & 0.0162 \\ 
+  $T_2 - \Exp(T_2)$ & 0.0122 & 1.0000 & -0.0067 \\ 
+  $T_3 - \Exp(T_3)$ & 0.0162 & -0.0067 & 1.0000 \\ 
+\hline
+\end{tabular}
+\caption{Correlation matrix of $\mathbf{T}$}
+\end{table}
+Since the correlation terms are so small, it can be concluded that the sequence $T_1 - \Exp(T_1), T_2 - \Exp(T_2), T_3 - \Exp(T_3)$ are independent.
+
+\item[(c)] After generating 10,000 random samples of $\mathbf{S} = (S_1 - \Exp(S_1), S_2 - \Exp(S_2), S_3 - \Exp(S_3))$, the covariance and correlation matrices are
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  9 13:48:44 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+& $S_1 - \Exp(S_1)$ & $S_2 - \Exp(S_2)$ & $S_3 - \Exp(S_3)$ \\   \hline
+  \hline
+  $S_1 - \Exp(S_1)$ & 2 24.98 & 0.13 & 0.32 \\ 
+  $S_2 - \Exp(S_2)$ & 0.13 & 57.54 & -0.44 \\ 
+  $S_3 - \Exp(S_3)$ & 0.32 & -0.44 & 75.97 \\ 
+  \hline
+\end{tabular}
+\caption{Covariance matrix of $\mathbf{S}$}
+\end{table}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  9 13:36:33 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+& $S_1 - \Exp(S_1)$ & $S_2 - \Exp(S_2)$ & $S_3 - \Exp(S_3)$ \\   \hline
+  $S_1 - \Exp(S_1)$ & 1.0000 &  0.0034 & 0.0074 \\ 
+  $S_2 - \Exp(S_2)$ & 0.0034 & 1.0000 & -0.0067 \\ 
+  $S_3 - \Exp(S_3)$ & 0.0074 & -0.0067 & 1.0000 \\ 
+   \hline
+\end{tabular}
+\caption{Correlation matrix of $\mathbf{S}$}
+\end{table}
+Since the correlation terms are even smaller than $Cov(\mathbf{T})$, it can be concluded that the sequence $S_1 - \Exp(S_1), S_2 - \Exp(S_2), S_3 - \Exp(S_3)$ are independent.
+
+\item[(d)] The variances of $\mathbf{S}$ from the theoretical distribution are 25.15, 57.49 and 76.39. From the randomization distribution, the variances are 24.98, 57.54 and 75.97 (very close). \\ 
+The information fractions using the theoretical (expected) distributions are: 32.93\% and 75.26\%. \\
+The information fractions using the randomized distributions are: 32.88\% and 75.74\%. 
+
+\item[(e)] Using the $\alpha$-spending function $g(t) = 0.025t$, the Lan-DeMets bounds are:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  9 14:41:05 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrr}
+  \hline
+  Time & Lower & Upper & Exit pr. & Diff. pr. & Nominal Alpha \\ 
+  \hline
+  0.3293 & -2.6424 & 2.6424 & 0.0082 & 0.0082 & 0.0082 \\ 
+  0.7526 & -2.4959 & 2.4959 & 0.0188 & 0.0106 & 0.0126 \\ 
+  1.0000 & -2.5096 & 2.5096 & 0.0250 & 0.0062 & 0.0121 \\ 
+   \hline
+\end{tabular}
+\caption{Lan-DeMets bounds for $g(t) = 0.026t$, theoretical distribution}
+\end{table}
+The critical values at the information fractions derived from the previous part using theoretical variances are 2.6424, 2.4959 and 2.5096. \\
+Using the randomization distribution of the Z-statistic derived from $\mathbf{S}$, the probability of stopping at the two interim analysis are 0.0041 and 0.0104 respectively and the probability of rejecting $H_0$ at the final analysis is 0.0164. These are lower than the theoretical values based on $g(t)$
+
+\item[(f)] Using the information fractions from the randomized distributions, the Lan-DeMets bounds are:
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Wed Dec  9 21:51:35 2015
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrrr}
+  \hline
+  Time & Lower & Upper & Exit pr. & Diff. pr. & Nominal Alpha \\ 
+  \hline
+  0.3288 & -2.6429 & 2.6429 & 0.0082 & 0.0082 & 0.0082 \\ 
+  0.7574 & -2.4925 & 2.4925 & 0.0189 & 0.0107 & 0.0127 \\ 
+  1.0000 & -2.5110 & 2.5110 & 0.0250 & 0.0061 & 0.0120 \\ 
+   \hline
+\end{tabular}
+\caption{Lan-DeMets bounds for $g(t) = 0.026t$, randomized distribution}
+\end{table}
+The critical values at the information fractions derived from the previous part using theoretical variances are 2.6429, 2.4925 and 2.5110. \\ This procedure will reject $H_0$ at the second stage.
+
+\end{enumerate}
+
+\end{document}
+
+

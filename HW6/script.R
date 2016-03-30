@@ -1,0 +1,1 @@
+../fromConi/HWK 6/script.R

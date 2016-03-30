@@ -9,6 +9,7 @@ rm(list = objects(all.names = TRUE))
 ########################################################################
 ## Load header files and source functions
 ########################################################################
+#source('~/Courses/Stat641_Fall2015/HeaderFile_Nandi.R')
 source('~/RScripts/HeaderFile_Nandi.R')
 
 RScriptPath <- '~/Courses/Stat641_Fall2015/HW1/'

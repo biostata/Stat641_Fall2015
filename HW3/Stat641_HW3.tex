@@ -1,0 +1,120 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=1in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 3}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{October 8, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{(a)} 
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.65]{Plota.pdf}
+\vspace{-0.5cm}
+\caption{Kaplan-Meier estimates by treatment group}
+\end{figure}
+
+\noindent
+\textbf{(b)} 
+Under proportional hazards, $$\log \Lambda (t)=\log \Lambda_0 (t)+\beta \text{ trt}.$$
+Testing that there is no difference in survival by treatment is equivalent to test $H_0:\beta=0$:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+  \hline
+Test &Test Statistic & p-value \\
+\hline
+Wald&5.86&0.01552\\
+Score&5.91&0.01507\\
+Likelihood Ratio & 5.98  &0.01445 \\
+   \hline
+\end{tabular}
+\caption{Summary of tests}
+\end{table}
+
+For the three different test we reach the same conclusion: reject the null hypothesis with a 5\% sigificance and conclude that there is difference in the survival times between the two treatment groups.
+
+\noindent
+\textbf{(c)} 
+From the fitted model we get:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+  \hline
+    &  $\hat{\beta}$ & $e^{\hat{\beta}}$ &$SE(\hat{\beta})$ \\ 
+   \hline 
+trt &-0.3231 &   0.7239 &  0.1335 \\
+   \hline
+\end{tabular}
+\caption{Summary of treatment difference}
+\end{table}
+The 95\% confidence interval is $(0.5573, 0.9404)$.
+
+\noindent
+\textbf{(d)} If we add \emph{age} and \emph{sex} to the model:
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+  \hline
+Test &Test Statistic & p-value \\
+\hline
+Wald& 14.23 & 0.002613 \\
+Likelihood Ratio&  14.54 & 0.002257 \\
+\hline
+\end{tabular}
+\caption{Summary of tests adjusting for \emph{age} and \emph{sex}}
+\end{table}
+
+For both tests we reject the null hypothesis with a 5\% significance and conclude that there is difference in the survival times between the two treatment groups, even after adjusting for \emph{age} and \emph{sex}.
+
+\noindent
+\textbf{(e)} 
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.65]{Plote.pdf}
+\vspace{-0.5cm}
+\caption{Log cumulative hazard versus log time}
+\end{figure}
+These curves remain roughly the same distance apart for the portion where they are most stable; there is no evidence from the plot that the PH assumption does not hold.
+
+We also perform a test for the Cox regression model that was fitted in part (d):
+\begin{table}[H]
+\centering
+\begin{tabular}{lccc}
+  \hline
+& rho & chisq & p-value \\
+\hline
+trt             &0.0296 &0.20868 &0.648\\
+sex2 &0.0154 &0.05721 &0.811\\
+age             &0.0024 &0.00132 &0.971\\
+GLOBAL          &    NA &0.27726 &0.964\\
+   \hline
+\end{tabular}
+\caption{Proportional hazards tests results}
+\end{table}
+There is no evidence that PH assumption is violated
+
+\noindent
+\textbf{(f)} 
+{\emph{Age}} is not a confounder because even after controlling for age, the coefficient and standard error of $\beta_{\text{trt}}$ does not change much.
+\end{document}

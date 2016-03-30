@@ -1,3 +1,5 @@
+source('~/RScripts/fn_Library_SN.R')
+
 is.integer0 <- function(x)
 {
   is.integer(x) && !length(x)

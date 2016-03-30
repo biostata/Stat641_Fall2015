@@ -1,0 +1,113 @@
+\documentclass[11pt,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=0.9in, right=0.9in, top=1in, bottom=0.8in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{Homework 4}
+\author{Subhrangshu Nandi\\
+  Stat 641; Fall 2015}
+\date{October 22, 2015}
+%\date{}
+
+\maketitle
+
+\noindent
+\textbf{(1)} 
+\begin{enumerate}
+\item[(a)]
+The hazard ratio is $$ \frac{\hat{\lambda}_A}{\hat{\lambda}_B} = \frac{219/876}{241/835} = 0.866$$ The log-hazard ratio is $\hat{\beta}= log(0.866) = -0.144$. Variance of log-hazard ratio is
+$$ \Var(\hat{\beta}) = \frac{1}{241} + \frac{1}{219} = 0.008715$$ and the Wald statistic is
+$$ \frac{\hat{\beta}^2}{\Var(\hat{\beta})} = \frac{(-0.144)^2}{0.008715} = 2.3655 $$
+The p-value for the test is 0.12, so we cannot reject the null hypothesis. 
+The 95\% CI for $\beta$ is $-0.144 \pm 1.961\sqrt{0.008715} = (−0.327, 0.039)$, and the 95\% CI for $\lambda_B/\lambda_A = (0.721, 1.040)$
+
+\item[(b)]
+According to adherence:
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+  \hline
+Adherence & hazard ratio & log-hazard ratio \\ 
+  \hline
+ $>80$\% 	& $\frac{51/262}{52/180} = 0.674$ 	& -0.395 \\
+ 50\%-80\%  	& $\frac{148/463}{153/352} = 0.735 $ 	& -0.308 \\
+ $\leq 50$\% 	& $\frac{20/151}{36/303} = 1.115$ 	& 0.897\\
+   \hline
+\end{tabular}
+\caption{Summary of hazard ratios}
+\end{table}
+The hazard ratios for the “better compliers” ($> 80\%$ and 50\%-80\% strata) are much smaller than the overall comparison. But, the first way of analysis is still better. The is because the randomization ensures that the treatment assignments are independent of outcomes, and therefore, the ITT analysis is a valid test of the null hypothesis that there is no net causal effect of treatment assignment on outcomes. The apparent benefit of B relative to A in the stratified analysis does not represent a valid causal effect of treatment.
+\end{enumerate}
+
+\noindent
+\textbf{(2)} 
+\begin{enumerate}
+\item[(a)]
+\begin{enumerate}
+\item[i.] 
+$ E[Y_c(u)] = 1\cdot P(Y_c(u)=1) + 0\cdot P(Y_c(u)=0) = 0.32 $\\
+$ E[Y_t(u)] = 1\cdot P(Y_t(u)=1) + 0\cdot P(Y_t(u)=0) = 0.32 $\\
+
+And $E[Y_t(u)]-E[Y_c(u)]=0$.
+\item[ii.] $E[Y_c(u)|T(u)=c]$ is the mortality rate among subjects in strata A and B:
+$$E[Y_c(u)|T(u)=c]=\frac{12+8}{60+20}=0.25$$
+
+\item[iii.] $ E[Y_t(u)|T(u)=t]=\frac{12}{60}=0.2$. 
+
+\item[iv.] $E[Y_t(u)|T(u)=t]-E[Y_c(u)|T(u)=c]=0.2 - 0.25 = -0.05$ \\
+The Per-Protocol analysis shows that there is a difference in mortality rates between subjects assigned t who adhere to their assigned treatment and subjects assigned c who adhere to their assigned treatment. However, it does not represent a causal effect of treatment, but rather a bias due to the selection of subjects that receive their respective treatments. 
+Also, the treatment received is not independent of outcomes. For example, note that for subjects assigned c the probability of having received c given that a subject is dead is $\Prob(T(u) = c | \text{Dead}) - \frac{12 + 8}{20} = 0.625$, whereas $\Prob(T(u) = c | \text{Alive}) - \frac{48+12}{68} = 0.8824$
+
+\end{enumerate}
+
+\item[(b)] When 200 subjects are randomized to either t or c with equal probability
+
+\begin{table}[H]
+\centering
+\begin{tabular}{lcc}
+\hline
+ &  Assigned $t$ & Assigned $c$\\ 
+\hline
+A&$t$& $c$\\
+B&$c$&$c$\\
+C&no treatment&no treatment\\
+D& $t$& $t$\\
+\hline
+Total & 100 & 100\\
+\hline
+\end{tabular}
+\caption{Treatment received}
+\end{table}
+i.
+\begin{eqnarray*}
+ E[Y_c(u)|T(u)=c]&=& \frac{8+12+8}{20+60+60}=0.28 \\
+ E[Y_t(u)|T(u)=t]&=& \frac{12+6+6}{60+10+10}=0.3
+\end{eqnarray*}
+ii. The As-Treated analysis indicates that there is a difference in mortality rates between subjects receiving t and subjects receiving c. However, it does not represent a causal effect of treatment, but rather a bias in the selection of subjects receiving their respective treatments. Again, treatment received is not independent of outcomes.
+
+\item[(c)] Assuming that treatment $c$ has no effect:
+\begin{enumerate}
+\item[i.] $ E[Y_t(u)]= \frac{24}{100}=0.24$ and 
+ $E[Y_t(u)]-E[Y_c(u)]= 0.24-\frac{32}{100}=-0.08 $
+\item[ii.] $E[\tilde{Y}_t(u)|\tilde{T}(u)=t]= \frac{9+8+6+6}{60+20+10+10}=0.29 $ \\
+ $E[\tilde{Y}_t(u)|\tilde{T}(u)=t]-E[\tilde{Y}_c(u)|\tilde{T}(u)=c]= 0.29-\frac{32}{100}=-0.03$
+\item[iii.] $E[Y_t(u)|T(u)=t]=\frac{9}{60}=0.15$ \\
+$E[Y_t(u)|T(u)=t]-E[Y_c(u)|T(u)=c]=0.15-\frac{12+8}{20+60}=-0.1$.
+\item[iv.] The ITT analysis provides a valid causal analysis of assignment to treatment. The per-protocol analysis is not a valid causal analysis, because as above, adherence is not independent of outcome.
+
+\end{enumerate}
+
+\end{enumerate}
+
+\end{document}
